@@ -1,0 +1,19 @@
+{
+  "name": "cryptochain",
+  "version": "1.0.0",
+  "description": "Implementation of a basic blockchain network using JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skhiearth/Cryptochain.git"
+  },
+  "author": "Utkarsh Sharma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/skhiearth/Cryptochain/issues"
+  },
+  "homepage": "https://github.com/skhiearth/Cryptochain#readme"
+}
