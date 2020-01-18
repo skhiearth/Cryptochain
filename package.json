@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/skhiearth/Cryptochain/issues"
   },
-  "homepage": "https://github.com/skhiearth/Cryptochain#readme"
+  "homepage": "https://github.com/skhiearth/Cryptochain#readme",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
 }
