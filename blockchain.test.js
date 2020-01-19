@@ -1,5 +1,6 @@
 const Blockchain = require('./blockchain');
 const Block = require('./block');
+const cryptoHash = require('./crypto-hash');
 
 describe('Blockchain', () => {
     let blockchain, newChain, originalChain;
@@ -42,11 +43,32 @@ describe('Blockchain', () => {
                 blockchain.addBlock({data: 'foo-bar'});
                 blockchain.addBlock({data: 'foo-bar1'});
                 blockchain.addBlock({data: 'foo-bar2'});
-            })
+            });
 
             describe('lastHash reference has changed', () => {
                 it('returns false', () => {
                     blockchain.chain[2].lastHash = 'brokenlastHash';
+
+                    expect(Blockchain.isValidChain(blockchain.chain)).toBe(false);
+                });
+            });
+
+            describe('the chain contains a block with a jumped difficulty', () => {
+                it('returns false', () => {
+                    const lastBlock = blockchain.chain[blockchain.chain.length - 1];
+                    const lastHash = lastBlock.hash;
+                    const timestamp = Date.now();
+                    const nonce = 0;
+                    const data = [];
+                    const difficulty = lastBlock.difficulty - 3;
+
+                    const hash = cryptoHash(timestamp, lastHash, difficulty, nonce, data);
+
+                    const badBlock = new Block({
+                        timestamp, lastHash, hash, nonce, difficulty, data
+                    });
+
+                    blockchain.chain.push(badBlock);
 
                     expect(Blockchain.isValidChain(blockchain.chain)).toBe(false);
                 });
@@ -59,11 +81,11 @@ describe('Blockchain', () => {
                     expect(Blockchain.isValidChain(blockchain.chain)).toBe(false);
                 });
             });
-        });
 
-        describe('the chain does not contain any invalid blocks', () => {
-            it('returns true', () => {
-                    expect(Blockchain.isValidChain(blockchain.chain)).toBe(true);
+            describe('the chain does not contain any invalid blocks', () => {
+                it('returns true', () => {
+                        expect(Blockchain.isValidChain(blockchain.chain)).toBe(true);
+                });
             });
         });
     });
