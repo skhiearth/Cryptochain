@@ -18,5 +18,8 @@
   "homepage": "https://github.com/skhiearth/Cryptochain#readme",
   "devDependencies": {
     "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
   }
 }
